@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+    <head>
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="/asset/avatar.jpg"/>
+        <link rel="canonical" href="http://guolinn.com/">
+        <link rel="alternate" type="application/rss+xml" title="Frankie" href="">
+        <title>Minikube Learning Notes | Frankie is a coder</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <meta name="generator" content="Hexo 5.4.0"></head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            <a id="logo" href="/"><img src="/asset/avatar.jpg" alt="Frankie is a coder" /></a>
+            <h1><a href="/">Frankie</a></h1>
+            <p>Keep coding, keep fun.</p>
+            <div id="follow-icons">
+          <a target="_blank" rel="noopener" href="http://github.com/frankielam"><i class="fa fa-github-square fa-2x"></i></a>
+          </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  November 6, 2021
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href='/tags/Docker/'>Docker</a> 
+    
+      <a href='/tags/SpringBoot/'>SpringBoot</a> 
+    
+      <a href='/tags/K8S/'>K8S</a> 
+    
+      <a href='/tags/Minikube/'>Minikube</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">Minikube Learning Notes</h1>
+  <section class="post-content article-entry">
+    <h2 id="0-background-info"><a href="#0-background-info" class="headerlink" title="0. background info"></a>0. background info</h2><ul>
+<li>操作时使用系统 macOS Big Sur </li>
+<li>已安装 Docker Desktop version 3.4.0</li>
+<li>已安装 kubectl </li>
+</ul>
+<h2 id="1-Mac-下安装-minikube"><a href="#1-Mac-下安装-minikube" class="headerlink" title="1. Mac 下安装 minikube"></a>1. Mac 下安装 minikube</h2><p>使用阿里云构建的版本避免网络超时报错问题。 : (</p>
+<ul>
+<li>安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ curl -Lo minikube https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v1.23.1/minikube-darwin-amd64 &amp;&amp; chmod +x minikube &amp;&amp; sudo mv minikube /usr/<span class="built_in">local</span>/bin/</span><br><span class="line"></span><br><span class="line">$ minikube version</span><br><span class="line">minikube version: v1.23.1</span><br><span class="line">commit: 9e2f8cb489d9b3e871ba206d40ae92c7521b7e76-dirty</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动 minikube</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ minikube start</span><br><span class="line">😄  minikube v1.23.1 on Darwin 11.4</span><br><span class="line">✨  Using the docker driver based on existing profile</span><br><span class="line">👍  Starting control plane node minikube in cluster minikube</span><br><span class="line">🚜  Pulling base image ...</span><br><span class="line">🔄  Restarting existing docker container for &quot;minikube&quot; ...</span><br><span class="line">🐳  Preparing Kubernetes v1.22.1 on Docker 20.10.8 ...</span><br><span class="line">🔎  Verifying Kubernetes components...</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/storage-provisioner:v5</span><br><span class="line">💡  After the addon is enabled, please run &quot;minikube tunnel&quot; and your ingress resources would be available at &quot;127.0.0.1&quot;</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/dashboard:v2.3.1</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.0</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/metrics-scraper:v1.0.7</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/kube-webhook-certgen:v1.0</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/nginx-ingress-controller:v1.0.0-beta.3</span><br><span class="line">🔎  Verifying ingress addon...</span><br><span class="line">🌟  Enabled addons: ingress, storage-provisioner, default-storageclass, dashboard</span><br><span class="line">🏄  Done! kubectl is now configured to use &quot;minikube&quot; cluster and &quot;default&quot; namespace by default</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动 Dashborad 查看下可视化界面（Ctrl + C 关闭）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ minikube dashboard</span><br><span class="line">🔌  Enabling dashboard ...</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/dashboard:v2.3.1</span><br><span class="line">    ▪ Using image registry.cn-hangzhou.aliyuncs.com/google_containers/metrics-scraper:v1.0.7</span><br><span class="line">🤔  Verifying dashboard health ...</span><br><span class="line">🚀  Launching proxy ...</span><br><span class="line">🤔  Verifying proxy health ...</span><br><span class="line">🎉  Opening http://127.0.0.1:63696/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-确认-kubectl-已正确安装"><a href="#2-确认-kubectl-已正确安装" class="headerlink" title="2. 确认 kubectl 已正确安装"></a>2. 确认 kubectl 已正确安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl version</span><br><span class="line">Client Version: version.Info&#123;Major:&quot;1&quot;, Minor:&quot;20&quot;, GitVersion:&quot;v1.20.4&quot;, GitCommit:&quot;e87da0bd6e03ec3fea7933c4b5263d151aafd07c&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2021-02-18T16:12:00Z&quot;, GoVersion:&quot;go1.15.8&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;&#125;</span><br><span class="line">Server Version: version.Info&#123;Major:&quot;1&quot;, Minor:&quot;20&quot;, GitVersion:&quot;v1.20.2&quot;, GitCommit:&quot;faecb196815e248d3ecfb03c680a4507229c2a56&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2021-01-13T13:20:00Z&quot;, GoVersion:&quot;go1.15.5&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;&#125;</span><br><span class="line">$ kubectl cluster-info</span><br><span class="line">Kubernetes control plane is running at https://172.17.0.18:8443</span><br><span class="line">KubeDNS is running at https://172.17.0.18:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy</span><br><span class="line"></span><br><span class="line">To further debug and diagnose cluster problems, use &#x27;kubectl cluster-info dump&#x27;.</span><br><span class="line"></span><br><span class="line">$ kubectl get nodes</span><br><span class="line">NAME       STATUS   ROLES                  AGE     VERSION</span><br><span class="line">minikube   Ready    control-plane,master   8m29s   v1.20.2</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-deploy-docker-image"><a href="#3-deploy-docker-image" class="headerlink" title="3. deploy docker image"></a>3. deploy docker image</h2><ul>
+<li>切换至 minukube 下的 docker-deamon </li>
+</ul>
+<p>进入 SpringBootDocker 项目根目录（该项目可查看 <a href="https://lqf.today/2021/11/04/a-demo-of-springbootdocker/">A demo of SpringBootDocker</a>），执行 docker 环境切换命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">eval</span> $(minikube docker-env)</span><br></pre></td></tr></table></figure>
+
+<p>minikube docker-env 会输出什么？可以 echo 看下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> $(minikube docker-env)</span><br><span class="line"><span class="built_in">export</span> DOCKER_TLS_VERIFY=<span class="string">&quot;1&quot;</span> <span class="built_in">export</span> DOCKER_HOST=<span class="string">&quot;tcp://127.0.0.1:61404&quot;</span> <span class="built_in">export</span> DOCKER_CERT_PATH=<span class="string">&quot;/Users/frankielam/.minikube/certs&quot;</span> <span class="built_in">export</span> MINIKUBE_ACTIVE_DOCKERD=<span class="string">&quot;minikube&quot;</span> <span class="comment"># To point your shell to minikube&#x27;s docker-daemon, run: # eval $(minikube -p minikube docker-env)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>build docker image </li>
+</ul>
+<p>在此之前已经执行过 mvn package 生成了 jar 文件。若 target 目录下还没生成 jar 文件，需先执行 mvn package。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ docker build --build-arg JAR_FILE=springboot-docker-latest.jar . -t springboot-demo</span><br><span class="line">Sending build context to Docker daemon  17.98MB</span><br><span class="line">Step 1/7 : FROM openjdk</span><br><span class="line"> ---&gt; deaa5a1a5f98</span><br><span class="line">Step 2/7 : MAINTAINER frankie &lt;frankie.lqf@gmail.com&gt;</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 696b42254be1</span><br><span class="line">Step 3/7 : ARG JAR_FILE</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; c91d2662aa59</span><br><span class="line">Step 4/7 : WORKDIR /app</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 78b8598dfa47</span><br><span class="line">Step 5/7 : COPY target/<span class="variable">$&#123;JAR_FILE&#125;</span> ./app.jar</span><br><span class="line"> ---&gt; b3eeb3df7985</span><br><span class="line">Step 6/7 : EXPOSE 8080</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> eb41b16c7f95</span><br><span class="line">Removing intermediate container eb41b16c7f95</span><br><span class="line"> ---&gt; 51f728a96b28</span><br><span class="line">Step 7/7 : CMD [<span class="string">&quot;java&quot;</span>, <span class="string">&quot;-jar&quot;</span>,  <span class="string">&quot;app.jar&quot;</span>]</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 12638d6033ad</span><br><span class="line">Removing intermediate container 12638d6033ad</span><br><span class="line"> ---&gt; 962e60dfeeed</span><br><span class="line">Successfully built 962e60dfeeed</span><br><span class="line">Successfully tagged springboot-demo:latest</span><br><span class="line">frankies-MacBook-Pro:SpringBootDocker frankielam$ minikube ssh</span><br><span class="line">Last login: Sat Nov  6 16:35:00 2021 from 192.168.49.1</span><br><span class="line"></span><br><span class="line">$ docker image list</span><br><span class="line">REPOSITORY       TAG       IMAGE ID       CREATED         SIZE</span><br><span class="line">springboot-demo    latest    962e60dfeeed   9 seconds ago   488MB</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>或者，切换至 minikube 的 docker daemon 后，直接运行 mvn 命令打包 docker image</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">eval</span> $(minikube docker-env)</span><br><span class="line">$ mvn package dockerfile:build</span><br><span class="line">$ docker image list | grep springboot-demo</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-create-deployment"><a href="#4-create-deployment" class="headerlink" title="4. create deployment"></a>4. create deployment</h2><ul>
+<li> 创建 springboo-demo-deployment.yaml 文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: springboot-demo-deployment</span><br><span class="line">  labels:</span><br><span class="line">    app: springboot-demo</span><br><span class="line">spec:</span><br><span class="line">  replicas: 3</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: springboot-demo</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: springboot-demo</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: springboot-demo</span><br><span class="line">          image: springboot-demo</span><br><span class="line">          imagePullPolicy: IfNotPresent</span><br><span class="line">          ports:</span><br><span class="line">            - containerPort: 8080</span><br></pre></td></tr></table></figure>
+
+<p>Kubenetes 1.9 之前的版本 apiVersion 需为 v1beta1</p>
+<p>imagePullPolicy 设置为 IfNotPresent (本地没有才去 pull) 或 Never</p>
+<ul>
+<li>创建 deployment  </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f springboo-demo-deployment.yaml </span><br><span class="line">deployment.apps/springboot-demo-deployment created</span><br><span class="line"></span><br><span class="line">$ kubectl get deployments</span><br><span class="line">NAME                         READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">springboot-demo-deployment   3/3     3            3           8m46s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl expose deployment springboot-demo-deployment --<span class="built_in">type</span>=LoadBalancer</span><br><span class="line">service/springboot-demo-deployment exposed</span><br><span class="line"></span><br><span class="line">$ kubectl get services</span><br><span class="line">NAME                         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE</span><br><span class="line">kubernetes                   ClusterIP      10.96.0.1        &lt;none&gt;        443/TCP          11m</span><br><span class="line">springboot-demo-deployment   LoadBalancer   10.109.176.242   &lt;pending&gt;     8080:30860/TCP   16s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>访问服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ minikube service springboot-demo-deployment --url</span><br><span class="line">🏃  Starting tunnel <span class="keyword">for</span> service springboot-demo-deployment.</span><br><span class="line">|-----------|----------------------------|-------------|------------------------|</span><br><span class="line">| NAMESPACE |            NAME            | TARGET PORT |          URL           |</span><br><span class="line">|-----------|----------------------------|-------------|------------------------|</span><br><span class="line">| default   | springboot-demo-deployment |             | http://127.0.0.1:49774 |</span><br><span class="line">|-----------|----------------------------|-------------|------------------------|</span><br><span class="line">http://127.0.0.1:49774</span><br><span class="line">❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>新开一个 terminal 访问应用。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl http://127.0.0.1:49774</span><br><span class="line">Hello frankie.</span><br></pre></td></tr></table></figure>
+<p>It  works.</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">https://minikube.sigs.k8s.io/docs/start/</a><br><a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-boot-minikube">https://www.baeldung.com/spring-boot-minikube</a><br><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/221687">https://developer.aliyun.com/article/221687</a></p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Frankie</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2021/11/04/a-demo-of-springbootdocker/">
+        <!--A demo of SpringBootDocker--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2021 Frankie. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.
+                
+                    <script type="text/javascript">document.write(unescape("%3Cspan class='cnzz_stat' id='cnzz_stat_icon_1280438066'%3E%3C/span%3E%3Cscript src='https://s4.cnzz.com/z_stat.php%3Fid%3D1280438066%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+                    </script>
+            </section>
+        </footer>
+    </body>
+</html>
+
+
